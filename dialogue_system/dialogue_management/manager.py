@@ -19,13 +19,13 @@ class DialogueManager(object):
 
     def select_action(self, dialogue_act):
         sys_act = deepcopy(dialogue_act)
-        if dialogue_act['user_act_type'] == 'OTHER':
+        # if dialogue_act['user_act_type'] == 'OTHER':
             #api = DocomoDialogAPI()
             #reply = api.reply(dialogue_act['utt'])
-            reply ="こんにちは"
-            sys_act['sys_act_type'] = 'CHAT'
-            sys_act['utt'] = reply
-        elif not self.dialogue_state.has('AGE'):
+            # reply ="こんにちは"
+            # sys_act['sys_act_type'] = 'CHAT'
+            # sys_act['utt'] = reply
+        if not self.dialogue_state.has('AGE'):
             sys_act['sys_act_type'] = 'REQUEST_AGE'
         elif not self.dialogue_state.has('GENDER'):
             sys_act['sys_act_type'] = 'REQUEST_GENDER'
