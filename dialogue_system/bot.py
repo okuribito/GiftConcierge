@@ -2,7 +2,7 @@
 from dialogue_system.dialogue_management.manager import DialogueManager
 from dialogue_system.language_generation.generator import LanguageGenerator
 from dialogue_system.language_understanding.language_understanding import RuleBasedLanguageUnderstanding
-from dialogue_system.search_item import SearchItem
+from dialogue_system.search_item.searchitem import SearchItem
 
 
 class Bot(object):
@@ -15,11 +15,13 @@ class Bot(object):
 
     def reply(self, sent):
 
-        if sys_act_type == 'REQUEST_HOBBY':
+        current_state = self.manager.getstate()
+
+        if current_state['AGE'] != None and current_state['GENDER'] != None and current_state['MAXIMUM_AMOUNT'] != None:
             init_data = {}
-            init_data['AGE'] = sys_act_type['AGE']
-            init_data['GENDER'] = sys_act_type['GENDER']
-            init_data['MAXIMUM_AMOUNT'] = sys_act_type['MAXIMUM_AMOUNT']
+            init_data['AGE'] = current_state['AGE']
+            init_data['GENDER'] = current_state['GENDER']
+            init_data['MAXIMUM_AMOUNT'] = current_state['MAXIMUM_AMOUNT']
 
             ins = SearchItem()
             ins.set_init(init_data)

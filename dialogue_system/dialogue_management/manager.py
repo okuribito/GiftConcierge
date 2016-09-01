@@ -14,6 +14,9 @@ class DialogueManager(object):
     def update_dialogue_state(self, dialogue_act):
         self.dialogue_state.update(dialogue_act)
 
+    def get_state(self):
+        return self.dialogue_state.get_state()
+
     def select_action(self, dialogue_act):
         sys_act = deepcopy(dialogue_act)
         if dialogue_act['user_act_type'] == 'OTHER':
@@ -30,7 +33,7 @@ class DialogueManager(object):
             #sys_act['sys_act_type'] = 'REQUEST_BUDGET'
         #elif not self.dialogue_state.has('RELATIONSHIP'):
             #sys_act['sys_act_type'] = 'REQUEST_RELATIONSHIP'  
-        elif not self.dialogue_state.has('MAXIMUM_AMOUNT')
+        elif not self.dialogue_state.has('MAXIMUM_AMOUNT'):
         	sys_act['sys_act_type'] = 'REQUEST_BUDGET'
         # else:
         #     api = HotPepperGourmetAPI()
@@ -45,9 +48,6 @@ class DialogueManager(object):
         # 初期情報がそろったあと趣味を聞く状態
         else:
             sys_act['sys_act_type'] = 'REQUEST_HOBBY'
-            sys_act['AGE'] = self.dialogue_state.get_age()
-            sys_act['GENDER'] = self.dialogue_state.get_gender()
-            sys_act['MAXIMUM_AMOUNT'] = self.dialogue_state.get_budget()
             return sys_act
 
         return sys_act 
