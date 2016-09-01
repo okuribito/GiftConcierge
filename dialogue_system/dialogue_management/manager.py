@@ -30,17 +30,24 @@ class DialogueManager(object):
             #sys_act['sys_act_type'] = 'REQUEST_BUDGET'
         #elif not self.dialogue_state.has('RELATIONSHIP'):
             #sys_act['sys_act_type'] = 'REQUEST_RELATIONSHIP'  
-        else:
-        	self.dialogue_state.has('MAXIMUM_AMOUNT')
+        elif not self.dialogue_state.has('MAXIMUM_AMOUNT')
         	sys_act['sys_act_type'] = 'REQUEST_BUDGET'
-        #else:
-            #api = HotPepperGourmetAPI()
-            #area = self.dialogue_state.get_area()
-            #food = self.dialogue_state.get_food()
-            #budget = self.dialogue_state.get_budget()
-            #restaurant = api.search_restaurant(area=area, food=food,budget=budget)
-            #sys_act['sys_act_type'] = 'INFORM_RESTAURANT'
-            #sys_act['restaurant'] = restaurant
-            #self.dialogue_state.clear()
+        # else:
+        #     api = HotPepperGourmetAPI()
+        #     area = self.dialogue_state.get_area()
+        #     food = self.dialogue_state.get_food()
+        #     budget = self.dialogue_state.get_budget()
+        #     restaurant = api.search_restaurant(area=area, food=food,budget=budget)
+        #     sys_act['sys_act_type'] = 'INFORM_RESTAURANT'
+        #     sys_act['restaurant'] = restaurant
+        #     self.dialogue_state.clear()
+
+        # 初期情報がそろったあと趣味を聞く状態
+        else:
+            sys_act['sys_act_type'] = 'REQUEST_HOBBY'
+            sys_act['AGE'] = self.dialogue_state.get_age()
+            sys_act['GENDER'] = self.dialogue_state.get_gender()
+            sys_act['MAXIMUM_AMOUNT'] = self.dialogue_state.get_budget()
+            return sys_act
 
         return sys_act 

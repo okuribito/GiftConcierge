@@ -25,6 +25,9 @@ class DialogueState(object):
     def get_budget(self):
         return self.__state['MAXIMUM_AMOUNT']
 
+    def get_state(self):
+        return self.__state
+
     #def get_relationship(self):
         #return self.__state['RELATIONSHIP']    
 
