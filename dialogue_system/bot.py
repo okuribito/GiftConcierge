@@ -2,7 +2,8 @@
 from dialogue_system.dialogue_management.manager import DialogueManager
 from dialogue_system.language_generation.generator import LanguageGenerator
 from dialogue_system.language_understanding.language_understanding import RuleBasedLanguageUnderstanding
-from dialogue_system.search_item.searchitem import SearchItem
+# from dialogue_system.search_item.searchitem import SearchItem
+from dialogue_system.search_item.recommend_dialogue import RecommendItem
 from dialogue_system.urlmaker import recommender
 from dialogue_system.morpheme import morpheme
 class Bot(object):
@@ -11,6 +12,7 @@ class Bot(object):
         self.generator = LanguageGenerator()
         self.language_understanding = RuleBasedLanguageUnderstanding()
         self.manager = DialogueManager()
+        self.recommend_item = RecommendItem()
 
 
     def reply(self, sent):
@@ -23,21 +25,30 @@ class Bot(object):
             init_data['GENDER'] = current_state['GENDER']
             init_data['MAXIMUM_AMOUNT'] = current_state['MAXIMUM_AMOUNT']
 
-            ins = SearchItem()
-            ins.set_init(init_data)
-            print(sent)
-            if len(sent) < 2:
-                return 'もう一回'
-            else:
-                ins.watson_classify(sent)
-                ins.search_item()
-                wakati_sent = morpheme(sent)
-                ins.search_description(wakati_sent)
-                item = ins.get_item()
-                
+            # ins = SearchItem()
+            # ins.set_init(init_data)
+            # print(sent)
+            # if len(sent) < 2:
+            #     return 'もう一回'
+            # else:
+            #     ins.watson_classify(sent)
+            #     ins.search_item()
+            #     wakati_sent = morpheme(sent)
+            #     ins.search_description(wakati_sent)
+            #     item = ins.get_item()
+            recommend_state self.recommend_item.get_state()
+            if recommend_state['state'] == 'WAITING_QUERY'
+                sent = self.recommend_item.recommend(init_data, sent)
+            elif recommend_state['state'] == 'WAITING_ANSWER'
+                sent = self.recommend_item.answer_type(text)
+            elif recommend_state['state'] == 'END'
+                print('END')
+                sys.exit(-1)
  
-                recommender(item["Pict_Url"],item["Name"])
-                return item['Name']
+            #     recommender(item["Pict_Url"],item["Name"])
+            #     return item['Name']
+
+
 
         else:
 

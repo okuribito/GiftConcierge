@@ -19,12 +19,6 @@ class DialogueManager(object):
 
     def select_action(self, dialogue_act):
         sys_act = deepcopy(dialogue_act)
-        # if dialogue_act['user_act_type'] == 'OTHER':
-            #api = DocomoDialogAPI()
-            #reply = api.reply(dialogue_act['utt'])
-            # reply ="こんにちは"
-            # sys_act['sys_act_type'] = 'CHAT'
-            # sys_act['utt'] = reply
         if not self.dialogue_state.has('AGE'):
             sys_act['sys_act_type'] = 'REQUEST_AGE'
         elif not self.dialogue_state.has('GENDER'):
@@ -35,17 +29,8 @@ class DialogueManager(object):
             #sys_act['sys_act_type'] = 'REQUEST_RELATIONSHIP'  
         elif not self.dialogue_state.has('MAXIMUM_AMOUNT'):
         	sys_act['sys_act_type'] = 'REQUEST_BUDGET'
-        # else:
-        #     api = HotPepperGourmetAPI()
-        #     area = self.dialogue_state.get_area()
-        #     food = self.dialogue_state.get_food()
-        #     budget = self.dialogue_state.get_budget()
-        #     restaurant = api.search_restaurant(area=area, food=food,budget=budget)
-        #     sys_act['sys_act_type'] = 'INFORM_RESTAURANT'
-        #     sys_act['restaurant'] = restaurant
-        #     self.dialogue_state.clear()
 
-        # 初期情報がそろったあと趣味を聞く状態
+        # 初期情報がそろったあと趣味を聞く
         else:
             sys_act['sys_act_type'] = 'REQUEST_HOBBY'
             return sys_act

@@ -11,8 +11,8 @@ class SearchItem(object):
     def __init__(self):
         
         self.__init_data = {'GENDER':'', 'AGE':'', 'MAXIMUM_AMOUNT':''}
-        self.__all_item_data = self.open_file()
-        self.__watson_category_list = []
+        self.__all_item_data = self.open_file('data.json')
+        self.__watson_category_list = [[] for i in range(6)]
         self.__item_candidate = [[] for i in range(6)]
 
 
@@ -32,8 +32,8 @@ class SearchItem(object):
 
 
 
-    def open_file(self):
-        file_path = os.path.join(BASE_DIR, 'data.json')
+    def open_file(self, file_name):
+        file_path = os.path.join(BASE_DIR, file_name)
 #        file_path= 'data.json'
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -54,31 +54,35 @@ class SearchItem(object):
 
 
     def watson_girl(self, text):
-        USERNAME = ''
-        PASSWORD = ''
-        CLASSIFIER_ID = ''
+        apikey = self.open_file('apikey.json')
+
+        USERNAME = apikey['girl']['username']
+        PASSWORD = apikey['girl']['password']
+        CLASSIFIER_ID = apikey['girl']['classifier_id']
 
         natural_language_classifier = NaturalLanguageClassifierV1(
             username=USERNAME, 
             password=PASSWORD)
         classes = natural_language_classifier.classify(CLASSIFIER_ID, text)
 
-        for i_class in classes['classes']:
-            self.__watson_category_list.append(i_class['class_name'])
+        for cnt, i_class in enumerate(classes['classes']):
+            self.__watson_category_list[cnt] = i_class['class_name']
 
 
     def watson_boy(self, text):
-        USERNAME = ''
-        PASSWORD = ''
-        CLASSIFIER_ID = ''
+        apikey = self.open_file('apikey.json')
+
+        USERNAME = apikey['boy']['username']
+        PASSWORD = apikey['boy']['password']
+        CLASSIFIER_ID = apikey['boy']['classifier_id']
 
         natural_language_classifier = NaturalLanguageClassifierV1(
             username=USERNAME, 
             password=PASSWORD)
         classes = natural_language_classifier.classify(CLASSIFIER_ID, text)
 
-        for i_class in classes['classes']:
-            self.__watson_category_list.append(i_class['class_name'])
+        for cnt, i_class in enumerate(classes['classes']):
+            self.__watson_category_list[cnt] = i_class['class_name']
 
 
     def search_item(self):
@@ -193,9 +197,10 @@ class SearchItem(object):
 
 
 if __name__ == '__main__':
-    init_data = {'GENDER':'女の子', 'AGE':'10', 'MAXIMUM_AMOUNT':''}
-    text = 'お誕生日パーティをします'
-    word_list = ['地図']
+    init_data = {'GENDER':'男の子', 'AGE':'10', 'MAXIMUM_AMOUNT':'3000'}
+    print(init_data)
+    text = 'ポケモンが好き'
+    word_list = ['ポケモン']
 
     ins = SearchItem()
     ins.set_init(init_data)
@@ -203,11 +208,15 @@ if __name__ == '__main__':
     ins.search_item()
     item = ins.get_item()
     item2 = ins.get_item(0, 1)
-    print('item1:   Name: {}, Price: {}円'.format(item['Name'], item['Price']))
-    print('item2:   Name: {}, Price: {}円'.format(item2['Name'], item2['Price']))
+    print(item)
+    print(item2)
+    # print('item1:   Name: {}, Price: {}円'.format(item['Name'], item['Price']))
+    # print('item2:   Name: {}, Price: {}円'.format(item2['Name'], item2['Price']))
     ins.search_description(word_list)
     item = ins.get_item()
     item2 = ins.get_item(0, 1)
-    print('item1:   Name: {}, Price: {}円'.format(item['Name'], item['Price']))
-    print('item2:   Name: {}, Price: {}円'.format(item2['Name'], item2['Price']))
+    print(item)
+    print(item2)
+    # print('item1:   Name: {}, Price: {}円'.format(item['Name'], item['Price']))
+    # print('item2:   Name: {}, Price: {}円'.format(item2['Name'], item2['Price']))
 
