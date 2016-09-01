@@ -37,7 +37,7 @@ class Bot(object):
             # dialogue_act = {'user_act_type': act_type, 'utt': sent, + 情報が得られたキー}
 
             self.manager.update_dialogue_state(dialogue_act) # dialogue_actから状態を更新
-            sys_act_type = self.manager.select_action(dialogue_act)　# sialogue_actに{sys_act_type:'CHAT'|'REQUEST_AGE'|'REQUEST_GENDER'|'REQUEST_BUDGET'|'REQUEST_HOBBY'}を追加したもの
+            sys_act_type = self.manager.select_action(dialogue_act) # sialogue_actに{sys_act_type:'CHAT'|'REQUEST_AGE'|'REQUEST_GENDER'|'REQUEST_BUDGET'|'REQUEST_HOBBY'}を追加したもの
 
             print(dialogue_act)
 
