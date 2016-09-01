@@ -3,8 +3,8 @@ from dialogue_system.dialogue_management.manager import DialogueManager
 from dialogue_system.language_generation.generator import LanguageGenerator
 from dialogue_system.language_understanding.language_understanding import RuleBasedLanguageUnderstanding
 from dialogue_system.search_item.searchitem import SearchItem
-
-
+from dialogue_system.urlmaker import recommender
+from dialogue_system.morpheme import morpheme
 class Bot(object):
 
     def __init__(self):
@@ -26,14 +26,17 @@ class Bot(object):
             ins = SearchItem()
             ins.set_init(init_data)
             print(sent)
-            if len(sent) < 3:
+            if len(sent) < 2:
                 return 'もう一回'
             else:
                 ins.watson_classify(sent)
                 ins.search_item()
-                ins.search_description([sent])
+                wakati_sent = morpheme(sent)
+                ins.search_description(wakati_sent)
                 item = ins.get_item()
-
+                
+ 
+                recommender(item["Pict_Url"],item["Name"])
                 return item['Name']
 
         else:
