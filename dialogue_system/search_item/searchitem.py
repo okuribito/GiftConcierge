@@ -4,6 +4,8 @@ import csv
 import os
 from watson_developer_cloud import NaturalLanguageClassifierV1
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 class SearchItem(object):
 
     def __init__(self):
@@ -31,8 +33,8 @@ class SearchItem(object):
 
 
     def open_file(self):
-#        file_path = os.path.join(BASE_DIR, 'data.json')
-        file_path= 'data.json'
+        file_path = os.path.join(BASE_DIR, 'data.json')
+#        file_path= 'data.json'
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
@@ -63,7 +65,7 @@ class SearchItem(object):
 
 
     def watson_boy(self, text):
-        USERNAME = '',
+        USERNAME = ''
         PASSWORD = ''
         CLASSIFIER_ID = ''
 
@@ -133,13 +135,13 @@ class SearchItem(object):
         与えられた単語リストからもっとも頻度の低いものを返す
         """
 
-#        file_path = os.path.join(BASE_DIR, 'bow_csv')
-        file_path = 'bow.csv'
+        file_path = os.path.join(BASE_DIR, 'bow.csv')
+#        file_path = 'bow.csv'
         f = open(file_path, 'r', encoding='utf-8')
         csv_data = csv.reader(f)
         bow_list_data = [v for v in csv_data]
 
-        most_word = ''
+        most_word = 'かわいい'
         min_freq = 1000
 
         for word in word_list:

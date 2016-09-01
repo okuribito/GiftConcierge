@@ -25,11 +25,16 @@ class Bot(object):
 
             ins = SearchItem()
             ins.set_init(init_data)
-            ins.watson_classify(sent)
-            ins.search_item()
-            item = ins.get_item()
+            print(sent)
+            if len(sent) < 3:
+                return 'もう一回'
+            else:
+                ins.watson_classify(sent)
+                ins.search_item()
+                ins.search_description([sent])
+                item = ins.get_item()
 
-            return item['Name']
+                return item['Name']
 
         else:
 

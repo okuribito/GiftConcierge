@@ -10,7 +10,7 @@ class LanguageGenerator(object):
     def generate_sentence(self, dialogue_act):
         sent = ''
         if 'AGE' in dialogue_act:
-            sent += '年齢は{0}才ですね。'.format(dialogue_act['AGE'])
+            sent += '{0}ですね。'.format(dialogue_act['AGE'])
         if 'GENDER' in dialogue_act:
             sent += '{0}ですね。'.format(dialogue_act['GENDER'])
         if 'MAXIMUM_AMOUNT' in dialogue_act:
@@ -18,7 +18,7 @@ class LanguageGenerator(object):
 
         sys_act_type = dialogue_act['sys_act_type']
         if sys_act_type == 'REQUEST_AGE':
-            sent += '年齢は何歳ですか？'
+            sent += '幼稚園？小学生？'
         elif sys_act_type == 'REQUEST_GENDER':
             sent += '男の子ですか？女の子ですか？'
         elif sys_act_type == 'REQUEST_BUDGET':
