@@ -1,12 +1,15 @@
 import urllib.request
-import json
+import json,os
 import numpy
 import PIL.Image
 import PIL.ImageDraw
 import PIL.ImageFont
 
-hostip = ""
-jsonData = json.load(open('item_list.json', 'r',encoding = "utf-8"))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(BASE_DIR, 'data.json')
+
+hostip = "54.238.180.244:80"
+jsonData = json.load(open(file_path, 'r',encoding = "utf-8"))
 
 def draw_text_at_center(string1,string2):
     text = string1
@@ -23,7 +26,7 @@ def draw_text_at_center(string1,string2):
     pos = img_size - img_size
     draw.text(pos, text2, (255, 255, 255))
     
-    img.save("/home/ubuntu/robotablet/static/uploads/image2/default.png","PNG",optimize = True)
+    #img.save("/home/ubuntu/robotablet/static/uploads/image2/default.png","PNG",optimize = True)
 
 def urlmaker(string1,string2):
     ini_url = "http://"+hostip+"/q?action=show_image2"
@@ -35,7 +38,8 @@ def urlmaker(string1,string2):
 def recommender(string1,string2):
     ini_url = "http://"+hostip+"/q?action=show_image2"
     image1 ="&image1=" + string1
-    image2 ="&image2="+"default.png"
-    draw_text_at_center(string2)
+    image2 ="&image1=" + string1
+    #image2 ="&image2="+"default.png"
+    #draw_text_at_center(string2)
+    print(ini_url + image1 + image2)
     return urllib.request.urlopen(ini_url + image1 + image2)
-

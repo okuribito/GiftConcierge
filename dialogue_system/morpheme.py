@@ -22,12 +22,3 @@ def morpheme(string):
             returnlist.append(str(wordlist[i].string))
     
     return returnlist
-~
-~
-~
-~
-~
-~
-~
-~
-~
