@@ -42,6 +42,9 @@ class SearchItem(object):
 
 
     def watson_classify(self, text):
+        """
+        textをWatsonNLCに投げる, 分類器は男女別に
+        """
 
         if self.__init_data['GENDER'] == '男の子':
             self.watson_boy(text)
@@ -79,6 +82,11 @@ class SearchItem(object):
 
 
     def search_item(self):
+        """
+        初期情報から商品を検索する
+        今のところ予算以下の商品を探して、WatsonNLCで選ばれたカテゴリ順に並び替え、
+        __item_candidate[]に格納
+        """
 
         tmp_item_list = self.apply_badget(self.__all_item_data, int(self.__init_data['MAXIMUM_AMOUNT']))
 
@@ -132,7 +140,7 @@ class SearchItem(object):
     def key_word_selct(self, word_list):
         """
         全商品の説明文中の単語頻度情報のcsvファイルを参照し、
-        与えられた単語リストからもっとも頻度の低いものを返す
+        与えられた単語リストからもっとも頻度の低いもの(重要語)を返す
         """
 
         file_path = os.path.join(BASE_DIR, 'bow.csv')
@@ -182,6 +190,7 @@ class SearchItem(object):
         except IndexError:
             print('該当する商品がありません')
             return self.__item_candidate[0][0]
+
 
 if __name__ == '__main__':
     init_data = {'GENDER':'女の子', 'AGE':'10', 'MAXIMUM_AMOUNT':''}
