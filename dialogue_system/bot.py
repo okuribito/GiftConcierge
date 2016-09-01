@@ -15,7 +15,7 @@ class Bot(object):
 
     def reply(self, sent):
 
-        current_state = self.manager.getstate()
+        current_state = self.manager.get_state()
 
         if current_state['AGE'] != None and current_state['GENDER'] != None and current_state['MAXIMUM_AMOUNT'] != None:
             init_data = {}
