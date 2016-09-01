@@ -49,9 +49,9 @@ class SearchItem(object):
 
 
     def watson_girl(self, text):
-        USERNAME = '42cc48c6-fde9-4012-8210-9377d58ecade'
-        PASSWORD = 'ayv4Mgb8LLVG'
-        CLASSIFIER_ID = 'be05f9x94-nlc-1170'
+        USERNAME = ''
+        PASSWORD = ''
+        CLASSIFIER_ID = ''
 
         natural_language_classifier = NaturalLanguageClassifierV1(
             username=USERNAME, 
@@ -63,9 +63,9 @@ class SearchItem(object):
 
 
     def watson_boy(self, text):
-        USERNAME = '506d20d1-16db-42fc-9976-a539a7a634d6',
-        PASSWORD = 'BoVEWAdoPEH5'
-        CLASSIFIER_ID = 'be05f9x93-nlc-1204'
+        USERNAME = '',
+        PASSWORD = ''
+        CLASSIFIER_ID = ''
 
         natural_language_classifier = NaturalLanguageClassifierV1(
             username=USERNAME, 
